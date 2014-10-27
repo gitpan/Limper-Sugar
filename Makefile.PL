@@ -22,7 +22,7 @@ my %WriteMakefileArgs = (
   "PREREQ_PM" => {
     "File::Basename" => 0,
     "File::Spec" => 0,
-    "Limper" => 0,
+    "Limper" => "0.012",
     "base" => 0,
     "strict" => 0,
     "warnings" => 0
@@ -30,7 +30,7 @@ my %WriteMakefileArgs = (
   "TEST_REQUIRES" => {
     "Test::More" => 0
   },
-  "VERSION" => "0.001",
+  "VERSION" => "0.002",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -40,7 +40,7 @@ my %WriteMakefileArgs = (
 my %FallbackPrereqs = (
   "File::Basename" => 0,
   "File::Spec" => 0,
-  "Limper" => 0,
+  "Limper" => "0.012",
   "Test::More" => 0,
   "base" => 0,
   "strict" => 0,

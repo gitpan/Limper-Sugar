@@ -1,5 +1,5 @@
 package Limper::Sugar;
-$Limper::Sugar::VERSION = '0.001';
+$Limper::Sugar::VERSION = '0.002';
 use base 'Limper';
 use 5.10.0;
 use strict;
@@ -35,17 +35,17 @@ my $scheme_rx = qr{^[a-z][a-z0-9+.-]*://}i;	# RFC 2396
 
 sub uri_for {
     return $_[0] unless $_[0] =~ $scheme_rx;
-    headers->{'x-forwarded-host'} // headers->{host}, $_[0];
+    request->{hheaders}{'x-forwarded-host'} // request->{hheaders}{host}, $_[0];
 }
 
 sub redirect {
     my ($uri, $status) = @_;
     status $status // 302;
-    headers headers, Location => uri_for $uri;
+    headers Location => uri_for $uri;
 }
 
 sub content_type {
-    headers headers, 'Content-Type' => $_[0];
+    headers 'Content-Type' => $_[0];
 }
 
 sub path {
@@ -65,7 +65,7 @@ Limper::Sugar - sugary things like Dancer does
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 SYNOPSIS
 
@@ -114,9 +114,7 @@ Exactly the same as L<File::Basename/dirname>.
 
 =head2 uri_for
 
-Prepends C<< headers->{'x-forwarded-host'} // headers->{host} >> to path.
-
-using the request's X-Forwarded-Host or Host value:
+Prepends the request's B<X-Forwarded-Host> or B<Host> value to the path.
 
 =head2 redirect
 
@@ -125,11 +123,11 @@ using the request's X-Forwarded-Host or Host value:
 Sugar for the following, plus it will turn a Limper path into a URI.
 
   status $status // 302;
-  headers headers, Location => uri_for $path;
+  headers Location => uri_for $path;
 
 =head2 content_type
 
-Sugar for C<< headers headers 'Content-Type' => $type >>.
+Sugar for C<< headers 'Content-Type' => $type >>.
 Note that this does not support abbreviated content types.
 
 =head2 path

@@ -16,15 +16,15 @@ name: Limper-Sugar
 provides:
   Limper::Sugar:
     file: lib/Limper/Sugar.pm
-    version: 0.001
+    version: 0.002
 requires:
   File::Basename: 0
   File::Spec: 0
-  Limper: 0
+  Limper: 0.012
   base: 0
   perl: v5.10.0
   strict: 0
   warnings: 0
 resources:
   repository: https://gitable.org/ashley/limper-sugar.git
-version: 0.001
+version: 0.002
